@@ -1,0 +1,13 @@
+bcrypt==5.0.0
+psycopg2-binary==2.9.13
+pwinput==1.0.3
+
+
+
+# python -m pip install -r requirements.txt
+#Esse código instala as dependências do projeto
+
+"""
+python -m pip freeze > requirements.txt
+Atualiza o requirements.txt com as novas bibliotecas instaladas
+"""
