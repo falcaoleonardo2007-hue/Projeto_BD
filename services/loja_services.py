@@ -115,8 +115,7 @@ def list_cart_games(user_id):
         cursor.execute(sql, (user_id,))
         resultado = cursor.fetchone()
         if resultado is None:
-            print("Carrinho não encontrado!")
-            return
+            return []
 
         carrinho_ID = resultado[0]
         sql = "SELECT Jogos.nome, Jogos.valor FROM Jogos INNER JOIN Jogo_Carrinho ON Jogos.jogos_ID = Jogo_Carrinho.jogos_ID WHERE Jogo_Carrinho.carrinho_ID = %s"
@@ -149,7 +148,7 @@ def remove_game_from_cart(user_id, game_name):
         resultado = cursor.fetchone()
 
         if resultado is None:
-            print("Carrinho não encontrado!")
+            print("Carrinho vazio!")
             return
 
         carrinho_ID = resultado[0]

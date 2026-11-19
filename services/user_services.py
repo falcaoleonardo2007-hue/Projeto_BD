@@ -10,7 +10,7 @@ def insert_cliente(nome: str, email: str, cpf: str, endereco: str, senha:str):
         sql = "INSERT INTO Usuarios(nome, email, cpf, endereco, senha) VALUES (%s, %s, %s, %s, %s)"
         cursor.execute(sql, (nome, email, cpf, endereco, senha))
         con.commit()
-        print("Usuarios cadastrado com sucesso!")
+        print("Usuario cadastrado com sucesso!")
 
 
     except Exception as e:

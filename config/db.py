@@ -14,4 +14,3 @@ def criar_conexao():
     except Exception as e:
         print(f"Erro de conexão {e}")
         return None
-

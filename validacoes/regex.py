@@ -6,5 +6,8 @@ def validar_email(email):
 
     return re.match(padrao_email, email)
 
+def validar_senha(senha):
 
+    padrao_senha = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*]).{8,}$'
     
+    return re.match(padrao_senha, senha)
