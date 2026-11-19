@@ -15,7 +15,7 @@ def user_panel(user_auth):
             case 1:
                 jogos = list_games()
                 for game in jogos:
-                    print(f"Jogos: {game[0]} - {game[1]} - {game[2]} - {game[3]} - {game[4]} - {game[5]} - {game[6]}")
+                    print(f"Jogos: ID_Jogo: {game[0]} - ID_Dev: {game[1]} - Nome: {game[2]} - Preço:{game[3]} reais - Lançamento:{game[4]} - Gênero: {game[5]} - Tamanhp: {game[6]}")
                     print("Pressione uma tecla para continuar...")
                     getch()
             case 2:

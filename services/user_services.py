@@ -62,3 +62,11 @@ def insert_admin(nome: str, email: str, cpf: str, endereco: str, senha:str):
         cursor.execute(sql, (nome, email, cpf, endereco, senha, True))
         con.commit()
         print("Admin cadastrado com sucesso!")
+        return True
+    except Exception as e:
+        print(f"Erro ao cadastrar admin: {e}")
+        return False
+    finally:
+        if con:
+            cursor.close()
+            con.close()

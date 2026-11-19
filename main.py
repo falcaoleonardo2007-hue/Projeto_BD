@@ -40,7 +40,6 @@ while True:
         if user_auth and admin:
             admin_panel(user_auth) #admin view
         elif user_auth:
-            print(f"Bem vindo {user_auth[1]}")
             user_panel(user_auth)
         else:
             print("Usuário ou senha inválidos!")
