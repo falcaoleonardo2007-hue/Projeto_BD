@@ -2,6 +2,8 @@ from services.loja_services import create_games, list_games, delete_game, update
 from services.user_services import insert_admin
 from os import system #system cls
 from msvcrt import getch
+import pwinput
+from validacoes.regex import validar_email, validar_senha
 
 
 def admin_panel(user_auth):
@@ -13,7 +15,12 @@ def admin_panel(user_auth):
         print("4 - Criar admin")
         print("5 - Deslogar")
 
-        opc = int(input("Digite uma opção: "))
+        try:
+            opc = int(input("Digite uma opção: "))
+            system('cls')
+        except ValueError:
+            print("Digite um número válido!")
+            continue
 
         if opc == 1:
             while True:
@@ -23,9 +30,14 @@ def admin_panel(user_auth):
                 print("4 - Atualizar desenvolvedora")
                 print("5 - Voltar ao menu do admin")
 
-                opc_dev = int(input("Digite uma opção: "))
+                try:
+                    opc = int(input("Digite uma opção: "))
+                    system('cls')
+                except ValueError:
+                    print("Digite um número válido!")
+                    continue
 
-                match opc_dev:
+                match opc:
                     case 1:
                         nome = input("Digite o nome da desenvolvedora: ")
                         CEP = input("Digite o CEP da desenvolvedora: ")
@@ -64,8 +76,15 @@ def admin_panel(user_auth):
                 print("3 - Remover jogo")
                 print("4 - Atualizar jogo")
                 print("5 - Voltar ao menu do admin")
-                opc_game = int(input("Digite uma opção: "))
-                match opc_game:
+
+                try:
+                    opc = int(input("Digite uma opção: "))
+                    system('cls')
+                except ValueError:
+                    print("Digite um número válido!")
+                    continue
+
+                match opc:
                     case 1:
                         nome = input("Digite o nome do jogo: ")
                         valor = float(input("Digite o valor do jogo: "))
@@ -107,11 +126,33 @@ def admin_panel(user_auth):
             gerenciar_usuarios()
 
         elif opc == 4:
-            nome = input("Digite o nome do admin: ")
-            email = input("Digite o email do admin: ")
-            cpf = input("Digite o CPF do admin: ")
-            endereco = input("Digite o endereço do admin: ")
-            senha = input("Digite a senha do admin: ")
+            nome = input("Digite o nome do adm: ")
+            while True:
+                email = input("Digite o email do adm: ") 
+            
+                if not validar_email(email):
+                    print("Email inválido!")
+                    continue
+                else: 
+                    break
+            
+            cpf = input("Digite o CPF do adm: ")
+            endereco = input("Cadastre o endereço do adm endereço: ")
+            
+            while True:
+                senha = pwinput.pwinput("Digite a senha adm senha: ")
+            
+                if not validar_senha(senha):
+                    print("\nSenha inválida! A senha precisa conter:")
+                    print("- No mínimo 8 caracteres.")
+                    print("- Pelo menos uma letra minúscula.")
+                    print("- Pelo menos uma letra maiúscula.")
+                    print("- Pelo menos um número.")
+                    print("- Pelo menos um caractere especial (!@#$%&*).\n")
+                    continue
+                else:
+                    break
+
             insert_admin(nome, email, cpf, endereco, senha)
             print("Admin cadastrado com sucesso!")
 
