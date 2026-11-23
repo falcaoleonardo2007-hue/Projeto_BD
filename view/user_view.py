@@ -19,18 +19,14 @@ def user_panel(user_auth):
 
         match opc:
             case 1:
-                opc = int(input("1 - Listar todos os jogos\n2 - Listar jogos com desenvolvedora\nDigite uma opção: "))
-                if opc == 1:
                     print("--JOGOS--")
                     jogos = list_games()
-                elif opc == 2:
-                    print("--JOGOS--")
-                    jogos = list_games_com_dev()
-                for game in jogos:
-                    print(f"Jogos: ID_Jogo: {game[0]} - ID_Dev: {game[1]} - Nome: {game[2]} - Preço:{game[3]} reais - Lançamento:{game[4]} - Gênero: {game[5]} - Tamanhp: {game[6]}")
+                    for game in jogos:
+                        print(f"ID: {game[0]} | {game[1]} | R$ {game[2]} | {game[3]} | Dev: {game[4]}")
                     print("Pressione uma tecla para continuar...")
                     getch()
             case 2:
+                print("Jogos disponíveis:")
                 jogos = list_games()
                 for game in jogos:
                     print(f"Jogos: {game[2]} | Preço: R$ {game[3]}") 
@@ -63,12 +59,13 @@ def user_panel(user_auth):
                         case 2:
                             print("--SEU CARRINHO--")
                             jogos = list_cart_games(user_auth[0])
-                            for game in jogos:
-                                print(f"Jogo: {game[2]}")
-
-                            game_name = input("Digite o nome do jogo que deseja remover: ")
-                            remove_game_from_cart(user_auth,game_name)
-
+                            if not jogos:
+                                print("Carrinho vazio!")
+                            else:
+                                for game in jogos:
+                                    print(f"Jogo: {game[0]} | Preço: R$ {game[1]:.2f}")
+                                game_name = input("Digite o nome do jogo que deseja remover: ")
+                                remove_game_from_cart(user_auth[0], game_name)
                         case 3:
                             break
                         case _:

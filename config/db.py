@@ -5,9 +5,9 @@ def criar_conexao():
         conn = psycopg2.connect(
             dbname='loja_de_jogos',
             user='postgres',
-            password='',
-            host='',
-            port=''
+            password='16L03r',
+            host='localhost',
+            port='5432'
         )
         # print("Conectado com sucesso!")
         return conn

@@ -82,15 +82,18 @@ def add_game_to_cart(user_id, game_name):
             return
 
         game_ID = resultado[0]
+
         sql = "SELECT carrinho_ID FROM Carrinho WHERE usuario_ID = %s"
         cursor.execute(sql, (user_id,))
         resultado = cursor.fetchone()
 
         if resultado is None:
-            print("Carrinho não encontrado!")
-            return
+            sql = "INSERT INTO Carrinho (usuario_ID, quantidade_jogos) VALUES (%s, 0) RETURNING carrinho_ID"
+            cursor.execute(sql, (user_id,))
+            resultado = cursor.fetchone()
 
         carrinho_ID = resultado[0]
+
         sql = "INSERT INTO Jogo_Carrinho (carrinho_ID, jogos_ID) VALUES (%s, %s)"
         cursor.execute(sql, (carrinho_ID, game_ID))
         sql = "UPDATE Carrinho SET quantidade_jogos = quantidade_jogos + 1 WHERE carrinho_ID = %s"
@@ -111,20 +114,19 @@ def list_cart_games(user_id):
     cursor = conn.cursor()
 
     try:
-        sql = "SELECT carrinho_ID FROM Carrinho WHERE usuario_ID = %s"
+        sql = """
+            SELECT Jogos.nome, Jogos.valor
+            FROM Carrinho
+            INNER JOIN Jogo_Carrinho ON Jogo_Carrinho.carrinho_ID = Carrinho.carrinho_ID
+            INNER JOIN Jogos ON Jogos.jogos_ID = Jogo_Carrinho.jogos_ID
+            WHERE Carrinho.usuario_ID = %s
+        """
         cursor.execute(sql, (user_id,))
-        resultado = cursor.fetchone()
-        if resultado is None:
-            return []
-
-        carrinho_ID = resultado[0]
-        sql = "SELECT Jogos.nome, Jogos.valor FROM Jogos INNER JOIN Jogo_Carrinho ON Jogos.jogos_ID = Jogo_Carrinho.jogos_ID WHERE Jogo_Carrinho.carrinho_ID = %s"
-        cursor.execute(sql, (carrinho_ID,))
-        jogos = cursor.fetchall()
-        return jogos
+        return cursor.fetchall()
 
     except Exception as erro:
         print(f"Erro ao listar jogos do carrinho: {erro}")
+        return []
 
     finally:
         cursor.close()
@@ -223,7 +225,7 @@ def list_games_com_dev():
             SELECT Jogos.jogos_ID, Jogos.nome, Jogos.valor, Jogos.genero,
                    Desenvolvedoras.nome
             FROM Jogos
-            INNER JOIN Desenvolvedoras ON Jogos.dev_id = Desenvolvedoras.id
+            INNER JOIN Desenvolvedoras ON Jogos.dev_id = Desenvolvedoras.dev_ID
         """
         cursor.execute(sql)
         return cursor.fetchall()
@@ -242,7 +244,7 @@ def list_all_carts():
         sql = """
             SELECT Usuarios.nome, Jogos.nome, Jogos.valor
             FROM Usuarios
-            INNER JOIN Carrinho ON Carrinho.usuario_ID = Usuarios.id
+            INNER JOIN Carrinho ON Carrinho.usuario_ID = Usuarios.usuario_ID
             INNER JOIN Jogo_Carrinho ON Jogo_Carrinho.carrinho_ID = Carrinho.carrinho_ID
             INNER JOIN Jogos ON Jogos.jogos_ID = Jogo_Carrinho.jogos_ID
             ORDER BY Usuarios.nome
@@ -264,7 +266,7 @@ def count_games_por_dev():
         sql = """
             SELECT Desenvolvedoras.nome, COUNT(Jogos.jogos_ID)
             FROM Desenvolvedoras
-            INNER JOIN Jogos ON Jogos.dev_id = Desenvolvedoras.id
+            INNER JOIN Jogos ON Jogos.dev_id = Desenvolvedoras.dev_
             GROUP BY Desenvolvedoras.nome
             ORDER BY COUNT(Jogos.jogos_ID) DESC
         """

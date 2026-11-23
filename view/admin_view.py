@@ -51,8 +51,8 @@ def admin_panel(user_auth):
                         desenvolvedoras = listar_desenvolvedoras()
                         for dev in desenvolvedoras:
                             print(f"Desenvolvedoras: ID: {dev[0]} - Nome: {dev[1]} - CEP: {dev[2]} - {dev[3]}")
-                            print("Pressione uma tecla para continuar...")
-                            getch()
+                        print("Pressione uma tecla para continuar...")
+                        getch()
                     case 3:
                         id_dev = int(input("Digite o id da desenvolvedora para remover: "))
                         deletar_desenvolvedora(id_dev)
@@ -103,8 +103,8 @@ def admin_panel(user_auth):
                         jogos = list_games()
                         for game in jogos:
                             print(f"Jogos: ID: {game[0]} - Nome: {game[1]} - Valor: {game[2]} - Data de Lançamento: {game[3]} - Gênero: {game[4]} - Tamanho: {game[5]} - Desenvolvedora ID: {game[6]}")
-                            print("Pressione uma tecla para continuar...")
-                            getch()
+                        print("Pressione uma tecla para continuar...")
+                        getch()
                     case 3:
                         id_game = int(input("Digite o id do jogo para remover: "))
                         delete_game(id_game)
