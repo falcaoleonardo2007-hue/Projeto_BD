@@ -109,7 +109,7 @@ def admin_panel(user_auth):
                     case 2:
                         jogos = list_games()
                         for game in jogos:
-                            print(f"Jogos: ID: {game[0]} - Nome: {game[1]} - Valor: {game[2]} - Data de Lançamento: {game[3]} - Gênero: {game[4]} - Tamanho: {game[5]} - Desenvolvedora ID: {game[6]}")
+                            print(f"Jogos: ID: {game[0]} - Nome: {game[2]} - Valor: {game[3]} - Data de Lançamento: {game[4]} - Gênero: {game[5]} - Tamanho: {game[6]} - Desenvolvedora ID: {game[1]}")
                         print("Pressione uma tecla para continuar...")
                         getch()
                     case 3:
@@ -125,7 +125,7 @@ def admin_panel(user_auth):
                         genero = input("Digite o novo gênero do jogo: ")
                         tamanho = float(input("Digite o novo tamanho do jogo (em GB): "))
                         dev_id = int(input("Digite o novo ID da desenvolvedora: "))
-                        update_game(id_game, nome, valor, data_lacamento, genero, tamanho, dev_id)
+                        update_game(nome, valor, data_lacamento, genero, tamanho, dev_id, id_game)
                         print("Pressione uma tecla para continuar...")
                         getch()
                     case 5:

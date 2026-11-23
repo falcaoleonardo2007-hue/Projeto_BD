@@ -97,7 +97,7 @@ def list_games():
 def delete_game(game_ID):
     conn = criar_conexao()
     cursor = conn.cursor()
-    sql = 'DELETE FROM Jogos WHERE id=%s'
+    sql = 'DELETE FROM Jogos WHERE jogos_id=%s'
     cursor.execute(sql, [game_ID])
     conn.commit()
     print("Jogo Removido!")
@@ -105,7 +105,7 @@ def delete_game(game_ID):
 def update_game(game_ID, nome, valor, data_lacamento, genero, tamanho, dev_id):
     conn = criar_conexao()
     cursor = conn.cursor()
-    sql = 'UPDATE Jogos SET nome = %s, valor = %s, data_lacamento = %s, genero = %s, tamanho = %s, dev_id = %s WHERE id = %s'
+    sql = 'UPDATE Jogos SET nome = %s, valor = %s, data_lacamento = %s, genero = %s, tamanho = %s, dev_id = %s WHERE jogos_id = %s'
     cursor.execute(sql, [nome, valor, data_lacamento, genero, tamanho, dev_id, game_ID])
     conn.commit()
     print("Jogo atualizado!")
@@ -228,7 +228,7 @@ def gerenciar_usuarios():
                 cursor.execute(sql)
                 usuarios = cursor.fetchall()
                 for usuario in usuarios:
-                    print(f"ID: {usuario[0]}, Nome: {usuario[1]}, Email: {usuario[2]}, CPF: {usuario[3]}, Endereço: {usuario[4]}, Admin: {usuario[5]}")
+                    print(f"ID: {usuario[0]}, Nome: {usuario[1]}, Email: {usuario[2]}, CPF: {usuario[3]}, Endereço: {usuario[5]}")
             elif opc == 2:
                 user_id = int(input("Digite o ID do usuário para remover: "))
                 sql = "DELETE FROM Usuarios WHERE usuario_ID = %s"
