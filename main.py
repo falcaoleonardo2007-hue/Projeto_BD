@@ -70,5 +70,3 @@ while True:
         break
     else:
         print("Digite uma opção válida!")
-
-# Inner join para mostrar as tasks do usuário logado (3x)

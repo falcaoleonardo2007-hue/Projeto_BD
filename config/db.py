@@ -3,9 +3,9 @@ import psycopg2
 def criar_conexao():
     try:
         conn = psycopg2.connect(
-            dbname='loja_de_jogos',
+            dbname='postgres',
             user='postgres',
-            password='16L03r',
+            password='av45gcav',
             host='localhost',
             port='5432'
         )
