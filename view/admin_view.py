@@ -67,7 +67,14 @@ def admin_panel(user_auth):
                         print("Pressione uma tecla para continuar...")
                         getch()
                     case 5:
-                        count_games_por_dev()
+                        resultado = count_games_por_dev()
+                        if not resultado:
+                            print("Nenhum dado para mostrar.")
+                        for dev, qtd in resultado:
+                            print(f"{dev}: {qtd} jogo(s)")
+                        print("Pressione uma tecla para continuar...")
+                        getch()
+
                     case 6:
                         break
                     case _:
@@ -129,7 +136,14 @@ def admin_panel(user_auth):
         elif opc == 3:
             gerenciar_usuarios()
         elif opc == 4:    
-            list_all_carts()
+            carrinhos = list_all_carts()
+            if not carrinhos:
+                print("Nenhum carrinho com jogos.")
+            for usuario, jogo, valor in carrinhos:
+                print(f"{usuario} -> {jogo} (R$ {valor})")
+            print("Pressione uma tecla para continuar...")
+            getch()
+
         elif opc == 5:
             nome = input("Digite o nome do adm: ")
             while True:

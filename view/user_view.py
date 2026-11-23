@@ -1,4 +1,4 @@
-from services.loja_services import list_games, add_game_to_cart, list_cart_games, remove_game_from_cart, list_games_com_dev
+from services.loja_services import list_games, add_game_to_cart, list_cart_games, remove_game_from_cart
 from os import system #system cls
 from msvcrt import getch
 
