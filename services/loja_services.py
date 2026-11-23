@@ -213,3 +213,66 @@ def gerenciar_usuarios():
     finally:
         cursor.close()
         conn.close()
+
+
+def list_games_com_dev():
+    conn = criar_conexao()
+    cursor = conn.cursor()
+    try:
+        sql = """
+            SELECT Jogos.jogos_ID, Jogos.nome, Jogos.valor, Jogos.genero,
+                   Desenvolvedoras.nome
+            FROM Jogos
+            INNER JOIN Desenvolvedoras ON Jogos.dev_id = Desenvolvedoras.id
+        """
+        cursor.execute(sql)
+        return cursor.fetchall()
+    except Exception as erro:
+        print(f"Erro ao listar jogos: {erro}")
+        return []
+    finally:
+        cursor.close()
+        conn.close()
+
+
+def list_all_carts():
+    conn = criar_conexao()
+    cursor = conn.cursor()
+    try:
+        sql = """
+            SELECT Usuarios.nome, Jogos.nome, Jogos.valor
+            FROM Usuarios
+            INNER JOIN Carrinho ON Carrinho.usuario_ID = Usuarios.id
+            INNER JOIN Jogo_Carrinho ON Jogo_Carrinho.carrinho_ID = Carrinho.carrinho_ID
+            INNER JOIN Jogos ON Jogos.jogos_ID = Jogo_Carrinho.jogos_ID
+            ORDER BY Usuarios.nome
+        """
+        cursor.execute(sql)
+        return cursor.fetchall()
+    except Exception as erro:
+        print(f"Erro ao listar carrinhos: {erro}")
+        return []
+    finally:
+        cursor.close()
+        conn.close()
+
+
+def count_games_por_dev():
+    conn = criar_conexao()
+    cursor = conn.cursor()
+    try:
+        sql = """
+            SELECT Desenvolvedoras.nome, COUNT(Jogos.jogos_ID)
+            FROM Desenvolvedoras
+            INNER JOIN Jogos ON Jogos.dev_id = Desenvolvedoras.id
+            GROUP BY Desenvolvedoras.nome
+            ORDER BY COUNT(Jogos.jogos_ID) DESC
+        """
+        cursor.execute(sql)
+        return cursor.fetchall()
+    except Exception as erro:
+        print(f"Erro ao gerar relatório: {erro}")
+        return []
+    finally:
+        cursor.close()
+        conn.close()

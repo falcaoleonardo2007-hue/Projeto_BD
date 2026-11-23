@@ -1,4 +1,4 @@
-from services.loja_services import create_games, list_games, delete_game, update_game, cadastrar_desenvolvedora, listar_desenvolvedoras, deletar_desenvolvedora, atualizar_desenvolvedora, gerenciar_usuarios
+from services.loja_services import create_games, list_games, delete_game, update_game, cadastrar_desenvolvedora, listar_desenvolvedoras, deletar_desenvolvedora, atualizar_desenvolvedora, gerenciar_usuarios, list_all_carts, count_games_por_dev
 from services.user_services import insert_admin
 from os import system #system cls
 from msvcrt import getch
@@ -12,8 +12,9 @@ def admin_panel(user_auth):
         print("1 - Desenvolvedoras")
         print("2 - Jogos")
         print("3 - Gerenciar usuários")
-        print("4 - Criar admin")
-        print("5 - Deslogar")
+        print("4 - Carrinhos dos usuários")
+        print("5 - Criar admin")
+        print("6 - Deslogar")
 
         try:
             opc = int(input("Digite uma opção: "))
@@ -28,7 +29,8 @@ def admin_panel(user_auth):
                 print("2 - Listar desenvolvedoras")
                 print("3 - Remover desenvolvedora")
                 print("4 - Atualizar desenvolvedora")
-                print("5 - Voltar ao menu do admin")
+                print("5 - Jogos por desenvolvedora")
+                print("6 - Voltar ao menu do admin")
 
                 try:
                     opc = int(input("Digite uma opção: "))
@@ -65,6 +67,8 @@ def admin_panel(user_auth):
                         print("Pressione uma tecla para continuar...")
                         getch()
                     case 5:
+                        count_games_por_dev()
+                    case 6:
                         break
                     case _:
                         print("Digite uma opção válida!")
@@ -124,8 +128,9 @@ def admin_panel(user_auth):
 
         elif opc == 3:
             gerenciar_usuarios()
-
-        elif opc == 4:
+        elif opc == 4:    
+            list_all_carts()
+        elif opc == 5:
             nome = input("Digite o nome do adm: ")
             while True:
                 email = input("Digite o email do adm: ") 
@@ -156,7 +161,7 @@ def admin_panel(user_auth):
             insert_admin(nome, email, cpf, endereco, senha)
             print("Admin cadastrado com sucesso!")
 
-        elif opc == 5:
+        elif opc == 6:  
             system('cls')
             break
 

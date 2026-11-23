@@ -1,4 +1,4 @@
-from services.loja_services import list_games, add_game_to_cart, list_cart_games, remove_game_from_cart
+from services.loja_services import list_games, add_game_to_cart, list_cart_games, remove_game_from_cart, list_games_com_dev
 from os import system #system cls
 from msvcrt import getch
 
@@ -19,8 +19,13 @@ def user_panel(user_auth):
 
         match opc:
             case 1:
-                print("--JOGOS--")
-                jogos = list_games()
+                opc = int(input("1 - Listar todos os jogos\n2 - Listar jogos com desenvolvedora\nDigite uma opção: "))
+                if opc == 1:
+                    print("--JOGOS--")
+                    jogos = list_games()
+                elif opc == 2:
+                    print("--JOGOS--")
+                    jogos = list_games_com_dev()
                 for game in jogos:
                     print(f"Jogos: ID_Jogo: {game[0]} - ID_Dev: {game[1]} - Nome: {game[2]} - Preço:{game[3]} reais - Lançamento:{game[4]} - Gênero: {game[5]} - Tamanhp: {game[6]}")
                     print("Pressione uma tecla para continuar...")
