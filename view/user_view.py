@@ -24,7 +24,7 @@ def user_panel(user_auth):
                     print("--JOGOS--")
                     jogos = list_games()
                     for game in jogos:
-                        print(f"ID: {game[0]} | {game[1]} | R$ {game[2]} | {game[3]} | Dev: {game[4]}")
+                        print(f" {game[2]} | R$ {game[3]} | {game[6]} GB | Lançamento: {game[4]}")
                     print("Pressione uma tecla para continuar...")
                     getch()
             case 2:
