@@ -1,4 +1,5 @@
 from services.loja_services import list_games, add_game_to_cart, list_cart_games, remove_game_from_cart
+from services.pedido_services import criar_pedido, pagar_pedido, cancelar_pedido
 from os import system #system cls
 from msvcrt import getch
 
@@ -8,7 +9,8 @@ def user_panel(user_auth):
         print("1 - Listar jogos")
         print("2 - Adicionar jogos ao carrinho")
         print("3 - Carrinho")
-        print("4 - Deslogar")
+        print("4 - Criar pedido")
+        print("5 - Deslogar")
 
         try:
             opc = int(input("Digite uma opção: "))
@@ -71,6 +73,21 @@ def user_panel(user_auth):
                         case _:
                             print("Digite uma opção válida!")
             case 4:
+                pedido = criar_pedido(user_auth[0])
+                if pedido is not None:
+                    pedido_id, total = pedido
+                    print(f"Pedido #{pedido_id} criado.")
+                    print(f"Total a pagar: R$ {total:.2f}")
+                    confirmar = input("Confirmar pagamento? (s/n): ").lower()
+                    if confirmar == 's':
+                        if pagar_pedido(user_auth[0], pedido_id):
+                            print("Pagamento confirmado! Carrinho esvaziado.")
+                    else:
+                        cancelar_pedido(pedido_id)
+                        print("Compra cancelada. Seus jogos continuam no carrinho.")
+                print("Pressione uma tecla para continuar...")
+                getch()
+            case 5:
                 system('cls')
                 break
             case _:

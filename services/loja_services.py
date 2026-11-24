@@ -151,7 +151,7 @@ def add_game_to_cart(user_id, game_name):
         cursor.close()
         conn.close()
 
-def list_cart_games(user_id):
+def list_cart_games(user_id): #carrinho do usuário
     conn = criar_conexao()
     cursor = conn.cursor()
 

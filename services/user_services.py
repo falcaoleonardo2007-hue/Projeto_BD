@@ -52,7 +52,6 @@ def validar_admin(email: str):
             cursor.close()
             con.close() 
 
-
 def insert_admin(nome: str, email: str, cpf: str, endereco: str, senha:str):
     try:
         con = criar_conexao()
