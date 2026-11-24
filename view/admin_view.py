@@ -121,11 +121,11 @@ def admin_panel(user_auth):
                         id_game = int(input("Digite o id do jogo para atualizar: "))
                         nome = input("Digite o novo nome do jogo: ")
                         valor = float(input("Digite o novo valor do jogo: "))
-                        data_lacamento = input("Digite a nova data de lançamento do jogo (YYYY-MM-DD): ")
+                        data_lancamento = input("Digite a nova data de lançamento do jogo (YYYY-MM-DD): ")
                         genero = input("Digite o novo gênero do jogo: ")
                         tamanho = float(input("Digite o novo tamanho do jogo (em GB): "))
                         dev_id = int(input("Digite o novo ID da desenvolvedora: "))
-                        update_game(nome, valor, data_lacamento, genero, tamanho, dev_id, id_game)
+                        update_game(id_game, nome, valor, data_lancamento, genero, tamanho, dev_id)
                         print("Pressione uma tecla para continuar...")
                         getch()
                     case 5:

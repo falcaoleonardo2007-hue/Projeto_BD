@@ -105,7 +105,7 @@ def delete_game(game_ID):
 def update_game(game_ID, nome, valor, data_lacamento, genero, tamanho, dev_id):
     conn = criar_conexao()
     cursor = conn.cursor()
-    sql = 'UPDATE Jogos SET nome = %s, valor = %s, data_lacamento = %s, genero = %s, tamanho = %s, dev_id = %s WHERE jogos_id = %s'
+    sql = 'UPDATE Jogos SET nome = %s, valor = %s, data_lancamento = %s, genero = %s, tamanho = %s, dev_id = %s WHERE jogos_id = %s'
     cursor.execute(sql, [nome, valor, data_lacamento, genero, tamanho, dev_id, game_ID])
     conn.commit()
     print("Jogo atualizado!")
